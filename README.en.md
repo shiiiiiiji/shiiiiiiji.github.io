@@ -1,5 +1,7 @@
 # Math Island
 
+Live site: [https://shiiiiiiji.github.io/](https://shiiiiiiji.github.io/)
+
 A static arithmetic practice app for second-grade students. Each worksheet contains 98 questions in five columns and twenty rows.
 
 ## Run
@@ -13,9 +15,9 @@ Download the complete repository and open `index.html` in a browser, or serve th
 - Restore the original questions and view matching answers.
 - Download one A4 question page, optionally followed by a separate answer page.
 - Print without losing any questions or writing space.
-- Wider handwriting areas: result lines measure at least about 12.6 mm in the verified browser, with 9-10.6 mm inside fill-in parentheses. The original question font size is retained.
+- Wider handwriting areas: result lines measure at least about 12.6 mm in the verified browser, with 9-10.6 mm inside fill-in parentheses. The original question font size is retained. Questions align near the top of each row, leaving about 4 mm below for scratch work. The maximum/minimum instruction parentheses are spaced apart; answer cells remain vertically centered.
 - Enjoy coloring stars and a centered encouragement message that changes with each new worksheet.
 
-The source files are hosted on Gitee. Repository hosting alone does not enable a public website; a separate static hosting service is required if Gitee Pages is unavailable.
+The source files are hosted on [GitHub](https://github.com/shiiiiiiji/shiiiiiiji.github.io), with GitHub Pages enabled for the public website.
 
 See [README.md](README.md) for Chinese instructions.

@@ -9,6 +9,7 @@
     padding: 5, resultGap: 3, minResultWidth: 45, factorBlankWidth: 34, inequalityBlankWidth: 40,
     columns: Object.freeze([116, 128, 148, 160, 166].map(width => width / 718 * 100))
   });
+  const instructionText = heading => heading.replace(/\(\s*\)/g, '(　)');
   function questionParts(cell) {
     const expression = (cell.sourceText || cell.expression).replace(/\s/g, '').replace(/−/g, '-').replace(/\(\)/g, '□');
     const result = ['multiply', 'mixed', 'chain'].includes(cell.type);
@@ -82,12 +83,12 @@
     model.rows.forEach((row, r) => row.forEach((cell, c) => {
       const top = y + headerHeight + r * rowHeight;
       const left = edges[c] + layout.padding, right = edges[c+1] - layout.padding;
-      const baseline = top + rowHeight / 2 + fontSize / 3;
+      const baseline = top + (answerPage ? rowHeight / 2 + fontSize / 3 : fontSize + 1);
       if (answerPage) {
         text(cell.heading ? '' : String(cell.answer), (edges[c]+edges[c+1])/2, baseline, c === 2 ? fontSize * 14/16 : fontSize, false, 'center', right-left);
         return;
       }
-      if (cell.heading) { text(cell.heading, left, baseline, fontSize, true, 'left', right-left); return; }
+      if (cell.heading) { text(instructionText(cell.heading), left, baseline, fontSize, true, 'left', right-left); return; }
       const parts = questionParts(cell);
       text(parts.result ? parts.before : parts.before + '(', left, baseline, fontSize, true);
       const prefixWidth = ctx.measureText(parts.result ? parts.before : parts.before + '(').width;
@@ -163,5 +164,5 @@
     anchor.href = url; anchor.download = filename; document.body.appendChild(anchor); anchor.click(); anchor.remove();
     setTimeout(() => URL.revokeObjectURL(url), 60000);
   }
-  root.MathIslandPDF = { create, save, layout, questionParts };
+  root.MathIslandPDF = { create, save, layout, questionParts, instructionText };
 })(globalThis);

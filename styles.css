@@ -33,14 +33,15 @@
 .source-paper,#printRoot .source-paper{--sheet-unit:calc(100cqw / 794);padding:0;aspect-ratio:794/1123;display:block;position:relative;container-type:inline-size}
 .source-paper .source-table,#printRoot .source-table{position:absolute;left:calc(38 * var(--sheet-unit));top:calc(90 * var(--sheet-unit));width:calc(718 * var(--sheet-unit));margin:0;font-size:calc(20.646442 * var(--sheet-unit))}
 .source-paper .source-table th,#printRoot .source-table th{height:calc(48 * var(--sheet-unit));padding:0;line-height:1.1}
-.source-paper .source-table td,#printRoot .source-table td{height:calc(43 * var(--sheet-unit));padding:0 calc(5 * var(--sheet-unit));vertical-align:middle;line-height:1.2;white-space:nowrap}
+.source-paper .source-table td,#printRoot .source-table td{height:calc(43 * var(--sheet-unit));padding:calc(2 * var(--sheet-unit)) calc(5 * var(--sheet-unit)) 0;vertical-align:top;line-height:1.2;white-space:nowrap}
 .source-paper .instruction-cell,#printRoot .instruction-cell{font-size:inherit}
+.source-paper .answers-table td,#printRoot .answers-table td{padding-top:0;vertical-align:middle}
 .source-paper .answers-table td:nth-child(3),#printRoot .answers-table td:nth-child(3){font-size:calc(18.065637 * var(--sheet-unit))}
 .writing-formula{display:flex;align-items:baseline;width:100%;gap:calc(3 * var(--sheet-unit));white-space:nowrap}
 .given-expression{flex:0 0 auto}
-.result-writing-slot{flex:1 0 calc(45 * var(--sheet-unit));min-width:calc(45 * var(--sheet-unit));height:calc(27 * var(--sheet-unit));border-bottom:calc(.7 * var(--sheet-unit)) solid #9aaebe;line-height:1.2}
-.fill-formula{white-space:nowrap}
-.handwriting-gap{display:inline-block;width:calc(34 * var(--sheet-unit));margin:0 calc(1 * var(--sheet-unit));border-bottom:calc(.7 * var(--sheet-unit)) solid #9aaebe;line-height:1.2}
+.result-writing-slot{flex:1 0 calc(45 * var(--sheet-unit));min-width:calc(45 * var(--sheet-unit));height:calc(24.77573 * var(--sheet-unit));border-bottom:calc(.7 * var(--sheet-unit)) solid #9aaebe;line-height:1.2}
+.fill-formula{display:block;line-height:1.1;white-space:nowrap}
+.handwriting-gap{display:inline-block;width:calc(34 * var(--sheet-unit));margin:0 calc(1 * var(--sheet-unit));border-bottom:calc(.7 * var(--sheet-unit)) solid #9aaebe;line-height:inherit}
 .handwriting-gap.wide-gap{width:calc(40 * var(--sheet-unit))}
 .adventure-banner,.adventure-meta,.adventure-reward,.adventure-footnote{left:calc(38 * var(--sheet-unit));right:calc(38 * var(--sheet-unit))}
 .adventure-banner{top:calc(33 * var(--sheet-unit));height:calc(29 * var(--sheet-unit));gap:calc(13 * var(--sheet-unit))}

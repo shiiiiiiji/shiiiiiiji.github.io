@@ -34,7 +34,7 @@
   }
   function tableMarkup(answers) {
     const widths = answers ? [20,20,20,20,20] : MathIslandPDF.layout.columns;
-    return `<table class="source-table${answers ? ' answers-table' : ''}" aria-label="${answers ? '五列二十行答案表' : '五列二十行98道练习题'}"><colgroup>${widths.map(width => `<col style="width:${width}%">`).join('')}</colgroup><thead><tr><th colspan="5">${answers ? '答案' : `二上视算<br>坚持每日视算，筑牢数学计算基础`}</th></tr></thead><tbody>${state.rows.map(row => `<tr>${row.map(cell => `<td${cell.heading ? ' class="instruction-cell"' : ` data-type="${cell.type}"`}>${cell.heading ? (answers ? '' : escape(cell.heading)) : answers ? escape(cell.answer) : questionMarkup(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+    return `<table class="source-table${answers ? ' answers-table' : ''}" aria-label="${answers ? '五列二十行答案表' : '五列二十行98道练习题'}"><colgroup>${widths.map(width => `<col style="width:${width}%">`).join('')}</colgroup><thead><tr><th colspan="5">${answers ? '答案' : `二上视算<br>坚持每日视算，筑牢数学计算基础`}</th></tr></thead><tbody>${state.rows.map(row => `<tr>${row.map(cell => `<td${cell.heading ? ' class="instruction-cell"' : ` data-type="${cell.type}"`}>${cell.heading ? (answers ? '' : escape(MathIslandPDF.instructionText(cell.heading))) : answers ? escape(cell.answer) : questionMarkup(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
   }
   function paperMarkup(answers) {
     const labels = answers ? ['核对答案', '圈出错题', '再试一次'] : ['认真计算', '仔细检查', '坚持完成'];
