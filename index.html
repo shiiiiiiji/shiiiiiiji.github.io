@@ -1,50 +1,44 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#2855d9"><meta name="description" content="保留原表五列二十行、98道题的二上视算练习，一键换题并导出A4 PDF。"><title>口算探险岛 · 二上视算</title><link rel="stylesheet" href="styles.css"></head>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="拾迹的小应用：让日常多一点方便，多一点乐趣。">
+  <title>拾迹的小应用</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; color: #243b53; background: #f8f7f3; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(880px, 100%); margin: auto; padding: 80px 28px 48px; }
+    .signature { margin: 0 0 36px; font-size: 14px; letter-spacing: .08em; color: #677b8a; }
+    h1 { margin: 0 0 16px; font-size: clamp(32px, 7vw, 48px); line-height: 1.2; letter-spacing: -.035em; }
+    .intro { margin: 0 0 48px; color: #617383; line-height: 1.8; }
+    .app { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 24px; padding: 28px; border: 1px solid #dbe1e5; border-radius: 16px; background: white; color: inherit; text-decoration: none; transition: border-color .18s, transform .18s; }
+    .app:hover { border-color: #3567ad; transform: translateY(-2px); }
+    .app:focus-visible { outline: 3px solid #3567ad; outline-offset: 5px; }
+    .symbol { display: grid; place-items: center; width: 64px; height: 64px; background: #edf4ff; color: #3567ad; border-radius: 16px; font-size: 40px; }
+    h2 { margin: 0 0 10px; font-size: 23px; }
+    .description { margin: 0; color: #617383; font-size: 15px; line-height: 1.8; }
+    .open { color: #3567ad; font-size: 15px; white-space: nowrap; }
+    footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid #e1e5e7; font-size: 13px; color: #677b8a; }
+    @media (max-width: 540px) { main { padding-top: 48px; } .app { grid-template-columns: 48px 1fr; gap: 18px; padding: 22px; } .symbol { width: 48px; height: 48px; font-size: 32px; } .open { grid-column: 2; } h2 { font-size: 21px; } }
+    @media (prefers-reduced-motion: reduce) { .app { transition: none; } .app:hover { transform: none; } }
+  </style>
+</head>
 <body>
-<header class="topbar"><a class="brand" href="#" aria-label="口算探险岛首页"><span class="brand-mark" aria-hidden="true">×<i>+</i></span><span>口算探险岛<small>MATH ISLAND</small></span></a><div class="header-note">二年级 · 上学期<span class="divider"></span>每天一点小进步</div><button class="text-button" id="printButton"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 17H3V9h18v8h-3M6 14h12v7H6zM17 12h1"/></svg><span>直接打印</span></button></header>
-<main class="workspace">
-<aside class="controls" aria-label="练习设置"><div class="section-intro"><span class="eyebrow">TODAY'S LITTLE ADVENTURE</span><h1>今天，再进步一点。</h1><p>熟悉的练习纸，每次都有新挑战。</p></div>
-<div class="source-summary"><span class="source-badge">原表版式</span><h2>一张 A4，一整套练习。</h2><p>5 列 × 20 行 · 共 <strong>98 道</strong></p></div>
-<div class="source-types" aria-label="题型及题量"><div><span class="type-symbol">×</span><span>乘法口诀</span><strong>20 道</strong></div><div><span class="type-symbol">□</span><span>乘法填空</span><strong>20 道</strong></div><div><span class="type-symbol">±</span><span>乘加乘减</span><strong>20 道</strong></div><div><span class="type-symbol">+</span><span>连加连减</span><strong>20 道</strong></div><div><span class="type-symbol">&gt;</span><span>最大 / 最小填数</span><strong>18 道</strong></div></div>
-<button id="shuffleButton" class="button shuffle-button" aria-haspopup="dialog" aria-controls="luckyDialog"><span class="shuffle-spark" aria-hidden="true">✦</span>换一套题<span class="keycap">F9</span></button><p class="spin-invitation">转一转，抽取今天的冒险！</p><button id="restoreButton" class="restore-button">回到源文件的题目</button>
-<div class="export-block"><label class="answer-option"><input id="includeAnswers" type="checkbox" checked><span>PDF 附上独立答案页</span></label><button id="downloadButton" class="button primary-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span>下载 A4 PDF</span></button><p id="exportHint" class="field-note">1 页题目 + 1 页答案</p></div>
-<div class="little-note"><span aria-hidden="true">✦</span><p>不着急，认真算。<br><strong>每完成一套，点亮一颗认真星。</strong></p></div></aside>
-<section class="preview-area" aria-label="练习纸预览"><div class="preview-heading"><div><span class="eyebrow">YOUR PRACTICE SHEET</span><h2>小小练习，大大进步。</h2></div><span class="paper-format">A4 <span>·</span> 原表排版</span></div>
-<div class="preview-toolbar"><div class="view-tabs" role="tablist" aria-label="预览内容"><button id="questionTab" role="tab" aria-selected="true" aria-controls="previewPanel" class="active">练习题</button><button id="answerTab" role="tab" aria-selected="false" aria-controls="previewPanel" tabindex="-1">参考答案</button></div><div class="edition"><span id="sourceStatus">源文件题目</span><strong id="editionId">原表 01</strong></div></div>
-<p class="mobile-scroll-note">左右滑动查看完整五列，PDF 保持原表排版。</p>
-<div id="previewPanel" role="tabpanel" aria-labelledby="questionTab" tabindex="0"><article class="paper source-paper" id="paper" aria-label="A4练习纸"></article></div>
-<div class="preview-bottom"><span class="preview-note">完整 98 道 · 题目与下载一致</span><button id="completeButton" class="complete-button" aria-pressed="false"><span aria-hidden="true">☆</span>这一套，我完成啦</button></div><div id="rewardMessage" class="reward-message" aria-live="polite"></div></section></main>
-<footer class="site-footer"><span>口算探险岛</span><p>把大大的信心，藏进每天的小练习。</p><span>离线也能用</span></footer><div id="toast" class="toast" role="status" aria-live="polite"></div><div id="printRoot" aria-hidden="true"></div><noscript>请启用浏览器 JavaScript，以生成习题和下载 PDF。</noscript>
-<dialog id="luckyDialog" class="lucky-dialog" aria-labelledby="wheelTitle" aria-describedby="wheelSubtitle" data-phase="ready">
-  <div class="spin-card">
-    <div id="wheelConfetti" class="wheel-confetti" aria-hidden="true"></div>
-    <header class="spin-header"><span class="spin-brand"><span aria-hidden="true">✦</span> 口算探险岛 <span class="spin-brand-separator">/</span> 幸运抽题站</span><div class="spin-header-actions"><button id="wheelSound" class="spin-sound" type="button" aria-pressed="false">音效：关</button><button id="wheelClose" class="spin-close" type="button" aria-label="关闭幸运转盘">×</button></div></header>
-    <div class="spin-intro"><span class="spin-eyebrow">A LITTLE SPIN, A BIG ADVENTURE</span><h2 id="wheelTitle">转出今天的<span>奇妙冒险</span></h2><p id="wheelSubtitle">小手一点，看看幸运指针带你去哪一站！</p></div>
-    <div class="spin-main">
-      <div class="wheel-stage">
-        <span class="stage-spark spark-one" aria-hidden="true">✦</span><span class="stage-spark spark-two" aria-hidden="true">✧</span><span class="stage-spark spark-three" aria-hidden="true">+</span>
-        <span class="stage-sticker" aria-hidden="true">今天的好运<br><strong>正在转动！</strong></span>
-        <div class="wheel-machine">
-          <div class="wheel-rim"><div id="wheelLights" class="wheel-lights" aria-hidden="true"></div><div id="wheelRotor" class="wheel-rotor" aria-hidden="true"><div id="wheelLabels" class="wheel-labels"></div></div></div>
-          <div class="wheel-pointer" aria-hidden="true"><span></span></div>
-          <button id="wheelHub" class="wheel-hub" type="button" aria-label="转动幸运转盘"><span>GO!</span><small>转起来</small></button>
-        </div>
-        <div class="wheel-pedestal" aria-hidden="true"><span>LUCKY MATH CLUB</span><i>✦</i></div>
-        <div class="wheel-status-wrap"><span class="status-star" aria-hidden="true">✦</span><p id="wheelStatus" role="status" aria-live="polite">8 个奇妙目的地，下一站会是哪里？</p></div>
+  <main>
+    <p class="signature">SHIJI / 小应用集</p>
+    <h1>拾迹的小应用</h1>
+    <p class="intro">让日常多一点方便，多一点乐趣。</p>
+    <a class="app" href="./math-island/">
+      <span class="symbol" aria-hidden="true">×</span>
+      <div>
+        <h2>口算探险岛</h2>
+        <p class="description">转出今天的数学冒险。二上视算 98 道题，支持换题、A4 PDF 下载与打印。</p>
       </div>
-      <div class="spin-side">
-        <div class="adventure-pass">
-          <div class="pass-top"><span>你的冒险通行证</span><span aria-hidden="true">✦</span></div>
-          <div class="pass-ready"><div class="pass-mystery" aria-hidden="true">?</div><h3>下一站，充满惊喜。</h3><p>让指针帮你选一个目的地，<br>再带上新题，快乐出发！</p></div>
-          <div class="pass-result"><span class="pass-congrats">叮！你的冒险目的地是</span><span id="wheelResultIcon" class="pass-result-icon" aria-hidden="true">🌟</span><h3 id="wheelResultName"></h3><p id="wheelResultNote"></p></div>
-          <div class="pass-tear" aria-hidden="true"></div><div class="pass-details"><span><b>98</b>道全新练习</span><span><b>5</b>种数学本领</span><span><b>A4</b>随时打印</span></div>
-        </div>
-        <button id="wheelAction" class="spin-action" type="button">转起来 <span aria-hidden="true">↗</span></button>
-        <button id="wheelSkip" class="spin-skip" type="button">直接揭晓</button>
-        <p class="spin-kind-note">每一站都有新题，每一次认真都值得鼓励。</p>
-      </div>
-    </div>
-    <footer class="spin-footer"><span aria-hidden="true">✦</span><span>带上好奇心，今天也要闪闪发光。</span><span aria-hidden="true">✦</span></footer>
-  </div>
-</dialog>
-<script src="engine.js"></script><script src="source-data.js"></script><script src="pdf.js"></script><script src="wheel.js"></script><script src="app.js"></script></body></html>
+      <span class="open">开始冒险 <span aria-hidden="true">↗</span></span>
+    </a>
+    <footer>一些小工具，一点小乐趣。</footer>
+  </main>
+</body>
+</html>
